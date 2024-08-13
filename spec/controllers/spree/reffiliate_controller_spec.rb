@@ -34,7 +34,7 @@ describe Spree::ReffiliateController, type: :controller do
       expect(response).to redirect_to('/')
     end
     it "renders a partial if affiliate partial is found" do
-      @affiliate.update_attribute :partial, 'corona'
+      @affiliate.update :partial, 'corona'
       controller.prepend_view_path 'spec/assets'
       spree_get :affiliate, path: @affiliate.path
       expect(response).to render_template('spree/affiliates/corona')

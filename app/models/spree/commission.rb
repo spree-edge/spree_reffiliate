@@ -17,7 +17,7 @@ module Spree
 
     def mark_paid!
       run_callbacks :mark_paid do
-        update_attributes!(paid: true)
+        update!(paid: true)
       end
     end
 

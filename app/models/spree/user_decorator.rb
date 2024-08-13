@@ -1,7 +1,7 @@
 module Spree
   module UserDecorator
 
-    def self.prepend(base)
+    def self.prepended(base)
       base.include(Spree::TransactionRegistrable)
       base.attr_accessor(:referral_code, :affiliate_code, :can_activate_associated_partner)
 
@@ -44,7 +44,7 @@ module Spree
 
     protected
       def password_required?
-        if new_record? && spree_roles.include?(Spree::Role.affiliate)
+        if new_record? && spree_roles.include?(Spree::Role.find_by(name: :affiliate))
           false
         else
           super
@@ -73,7 +73,7 @@ module Spree
       end
 
       def activate_associated_partner
-        associated_partner.update_attributes(activation_token: nil, activated_at: Time.current, active: true)
+        associated_partner.update(activation_token: nil, activated_at: Time.current, active: true)
       end
 
       def associated_partner_activable?
