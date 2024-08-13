@@ -4,7 +4,7 @@
       <h3 class="panel-title"><%= Spree.t(:editing_affiliate, scope: :affiliate_confirmation) %></h3>
     </div>
     <div class="panel-body">
-      <%= render partial: 'spree/shared/error_messages', locals: { target: @user } %>
+      <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @user } %>
 
       <%= form_for Spree::User.new, as: @user, url: spree.affiliate_confirmations_path, method: :post do |f| %>
         <%= render partial: 'spree/shared/user_form', locals: { f: f } %>

@@ -8,7 +8,7 @@ class CreateSpreeAffiliateCommissionRules < ActiveRecord::Migration[4.2]
       t.decimal :fixed_commission
       t.boolean :active, default: false, null: false, index: true
 
-      t.timestamp null: false
+      t.timestamps
     end
   end
 end
