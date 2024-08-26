@@ -1,7 +1,8 @@
 module Spree
   module StoreCreditDecorator
+    REFERRAL_STORE_CREDIT_CATEGORY = 'Referral Credit'
+
     def self.prepended(base)
-      # Spree::StoreCredit::REFERRAL_STORE_CREDIT_CATEGORY = 'Referral Credit'
       base.has_one(:referred_record)
       base.after_commit(:send_credit_reward_information, on: :create, if: :referral?)
     end
@@ -9,7 +10,7 @@ module Spree
     private
 
     def referral?
-      category.try(:name) == Spree::StoreCredit::REFERRAL_STORE_CREDIT_CATEGORY
+      category.try(:name) == REFERRAL_STORE_CREDIT_CATEGORY
     end
 
     def send_credit_reward_information
