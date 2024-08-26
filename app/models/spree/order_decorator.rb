@@ -4,6 +4,10 @@ module Spree
       base.has_many(:transactions, as: :commissionable, class_name: 'Spree::CommissionTransaction', dependent: :restrict_with_error)
       base.belongs_to(:affiliate, class_name: 'Spree::Affiliate')
       base.include(Spree::TransactionRegistrable)
+      base.state_machine.before_transition(
+        to: :complete,
+        do: :create_commission_transaction,
+      )
     end
 
     private

@@ -1,5 +1,5 @@
 module Spree
-  class ReffiliateController < Spree::StoreController
+  class ReffiliateController < ApplicationController
     def referral
       flash[:success] = Spree.t(:referral_code_applied)
       session[:referral] = params[:code]

@@ -4,7 +4,9 @@
 
 <% content_for :page_actions do %>
   <span id="new_affiliate_section">
-    <%= button_link_to Spree.t(:new_affiliate), new_admin_affiliate_url, icon: 'add', class: "btn-success", id: 'admin_new_affiliate_link' %>
+    <%= link_to new_admin_affiliate_path, class: 'btn btn-dark', id: 'admin_new_affiliate_link' do %>
+      <span class="pb-1 icon icon-add"></span> <%= Spree.t(:new_affiliate) %>
+    <% end %>
   </span>
 <% end %>
 <% if @affiliates.any? %>

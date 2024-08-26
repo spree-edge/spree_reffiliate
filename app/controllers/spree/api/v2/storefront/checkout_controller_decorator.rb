@@ -10,13 +10,13 @@ module Spree
 
           private
             def set_affilate
-              if @order.payment? && session[:affiliate]
-                @order.affiliate = Spree::Affiliate.find_by(path: session[:affiliate])
+              if spree_current_order.payment? && session[:affiliate]
+                spree_current_order.affiliate = Spree::Affiliate.find_by(path: session[:affiliate])
               end
             end
 
             def clear_session
-              session[:affiliate] = nil if @order.completed?
+              session[:affiliate] = nil if spree_current_order.completed?
             end
         end
       end

@@ -3,7 +3,9 @@
 <% end %>
 
 <% content_for :page_actions do %>
-  <%= link_to_with_icon 'arrow-left', Spree.t(:back_to_affilate), edit_admin_affiliate_path(@affiliate), class: 'btn btn-default' %>
+  <%= link_to edit_admin_affiliate_path(@affiliate), class: 'btn btn-dark' do %>
+    <span class="pb-1 icon icon-arrow-left"></span> <%= Spree.t(:back_to_affilate) %>
+  <% end %>
 <% end %>
 
 <% content_for :table_filter do %>
