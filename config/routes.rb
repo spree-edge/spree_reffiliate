@@ -3,6 +3,19 @@ Spree::Core::Engine.routes.draw do
   get 'a/:path' => 'reffiliate#affiliate', as: 'affiliate'
   get 'account/referral_details' => 'users#referral_details'
 
+  namespace :api do
+    namespace :v2 do
+      namespace :storefront do
+        resources :confirmations, only: [:new, :create], controller: 'confirmations' do
+          collection do
+            get :new
+            post :create
+          end
+        end
+      end
+    end
+  end
+
   namespace :admin do
     resources :affiliates do
       resources :commissions do
@@ -14,9 +27,5 @@ Spree::Core::Engine.routes.draw do
     resource :referral_settings, only: [:edit, :update]
 
     resources :commission_rules
-  end
-
-  namespace :affiliate do
-    resources :confirmations, only: [:new, :create]
   end
 end
