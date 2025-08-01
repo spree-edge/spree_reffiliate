@@ -54,6 +54,10 @@ module Spree
       transactions.where(commissionable_type: 'Spree::Order').count
     end
 
+    def pending_orders
+      transactions.where(commissionable_type: 'Spree::Order', locked: false).map(&:commissionable)
+    end
+
     private
 
       def create_user

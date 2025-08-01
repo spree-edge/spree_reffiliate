@@ -12,6 +12,8 @@ module Spree
 
     private
       def create_commission_transaction
+        return if self.affiliate.transactions.where(commissionable_id: self.id).present?
+
         register_commission_transaction(affiliate) if affiliate.present?
       end
   end
