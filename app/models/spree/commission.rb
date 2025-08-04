@@ -10,7 +10,7 @@ module Spree
 
     define_model_callbacks :mark_paid, only: :after
 
-    after_mark_paid :lock_transactions
+    after_mark_paid :lock_transaction
 
     def mark_paid!
       run_callbacks :mark_paid do
@@ -20,12 +20,12 @@ module Spree
 
     def display_total
       currency = Spree::Config[:currency]
-      Spree::Money.new(transactions.map(&:amount).compact.sum, { currency: currency })
+      Spree::Money.new(commission_transaction.amount, { currency: currency })
     end
 
     private
-      def lock_transactions
-        transactions.update_all(locked: true)
+      def lock_transaction
+        commission_transaction.update(locked: true)
       end
 
       def cannot_mark_unpaid
