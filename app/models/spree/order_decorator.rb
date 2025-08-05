@@ -12,9 +12,16 @@ module Spree
 
     private
       def create_commission_transaction
-        return if self.affiliate.transactions.where(commissionable_id: self.id).present?
+        return unless affiliate.present?
 
-        register_commission_transaction(affiliate) if affiliate.present?
+        already_exists = affiliate.transactions.where(
+          commissionable_id: id,
+          commissionable_type: self.class.name
+        ).exists?
+
+        return if already_exists
+
+        register_commission_transaction(affiliate)
       end
   end
 end
